@@ -1,33 +1,12 @@
-#from django.test import TestCase
-from apl.models import *
-from config.wsgi import *
-from pathlib import Path
-import sys
-sys.path.append(str(Path(__file__).parent.parent))
+from django.test import TestCase
+from apl.models import Categoria
 
-# listar
-#consulta = Categoria.objects.all()
-#print(consulta)
 
-# insertar
+class PruebaBasica(TestCase):
 
-#c = Categoria(nombre = 'frijol').save()
-#consulta = Categoria.objects.all()
-#print(consulta)
+    def test_verificar_entorno(self):
+        self.assertEqual(1 + 1, 2)
 
-#Editar
-#c = Categoria.objects.get(id=1)
-#c.nombre = 'cocacola'
-#c.save()
-#print(c.nombre)
-
-# Eliminar
-
-#c = Categoria.objects.get(id=1)
-#c.delete()
-#consulta = Categoria.objects.all()
-#print(consulta)
-
-# filtrado
-for c in Categoria.objects.filter():
-    print(c.nombre)
+    def test_crear_categoria(self):
+        Categoria.objects.create(nombre="Frijol")
+        self.assertTrue(Categoria.objects.filter(nombre="Frijol").exists())
